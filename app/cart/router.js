@@ -1,8 +1,15 @@
 const router = require("express").Router();
 const { police_check } = require("../../middlewares");
-const cartController = require("./controller");
+const multer = require("multer");
+var getFields = multer();
+const cartController = require("./newcarcontroller");
 
-router.put("/carts", police_check("update", "Cart"), cartController.update);
+router.post(
+  "/carts",
+  getFields.any(),
+  police_check("create", "Cart"),
+  cartController.store
+);
 
 router.get("/carts", police_check("read", "Cart"), cartController.index);
 

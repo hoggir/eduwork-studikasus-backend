@@ -10,8 +10,8 @@ function getToken(req) {
 
 const policies = {
   guest(user, { can }) {
-    can("manage", "all");
-    //can("read", "Product");
+    //can("manage", "all");
+    can("read", "Product");
   },
   user(user, { can }) {
     can("view", "Order");
@@ -20,6 +20,7 @@ const policies = {
     can("update", "Order", { _id: user._id });
     can("read", "Cart", { user_id: user._id });
     can("update", "Cart", { user_id: user._id });
+    can("create", "Cart", { user_id: user._id });
     can("view", "DeliveryAddress");
     can("create", "DeliveryAddress", { user_id: user._id });
     can("update", "DeliveryAddress", { user_id: user._id });

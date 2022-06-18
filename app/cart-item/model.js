@@ -19,8 +19,6 @@ const cartItemSchema = Schema({
     default: 0,
   },
 
-  image_url: String,
-
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",
