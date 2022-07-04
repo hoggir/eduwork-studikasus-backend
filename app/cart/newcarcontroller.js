@@ -33,7 +33,7 @@ const store = async (req, res, next) => {
       //USER TIDAK PUNYA CART >>> BUAT CART BARU
       const newCart = await Cart.create({
         userId: req.user._id,
-        products: [{ productId, pquantity, price, name, image_url }],
+        products: [{ productId, quantity, price, name, image_url }],
       });
 
       return res.status(201).send(newCart);

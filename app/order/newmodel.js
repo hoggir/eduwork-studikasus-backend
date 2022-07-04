@@ -1,12 +1,21 @@
 const mongoose = require("mongoose");
 const { model, Schema } = mongoose;
 
-const CartSchema = new mongoose.Schema(
+const OrderSchema = new mongoose.Schema(
   {
     userId: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },
+
+    delivery_address: {
+      provinsi: { type: String, required: [true, "provinsi harus diisi!"] },
+      kabupaten: { type: String, required: [true, "kabupaten harus diisi!"] },
+      kecamatan: { type: String, required: [true, "kecamatan harus diisi!"] },
+      kelurahan: { type: String, required: [true, "kelurahan harus diisi!"] },
+      name: { type: String },
+    },
+
     products: [
       {
         productId: {
@@ -34,6 +43,23 @@ const CartSchema = new mongoose.Schema(
         },
       },
     ],
+
+    status: {
+      type: String,
+      enum: ["waiting_payment", "processing", "in_delivery", "delivered"],
+      default: ["waiting_payment"],
+    },
+
+    delivery_fee: {
+      type: Number,
+      default: 0,
+    },
+
+    bill: {
+      type: Number,
+      required: true,
+    },
+
     modifiedOn: {
       type: Date,
       default: Date.now,
@@ -42,4 +68,4 @@ const CartSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = model("Cart", CartSchema);
+module.exports = model("Order", OrderSchema);
