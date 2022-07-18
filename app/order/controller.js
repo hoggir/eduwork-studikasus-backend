@@ -1,4 +1,4 @@
-const Order = require("../order/newmodel");
+const Order = require("../order/model");
 const Cart = require("../cart/model");
 const DeliveryAddress = require("../deliveryAddress/model");
 
